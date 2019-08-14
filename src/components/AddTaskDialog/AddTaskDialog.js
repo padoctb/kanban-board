@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import './style.css';
 
 class AddTaskDialog extends Component {
+
   render() {
     const { toggleDialog } = this.props;
 
     return (
-      <div className="dialog-wrapper">
+      <div onClick={e => e.target.className === 'dialog-wrapper' || e.target.className === 'dialog-close-btn' ? toggleDialog() : null} className="dialog-wrapper">
         <div className="dialog-content">
-          <div>dawdadweqweqweqiwo qoiweu qoiweuq owieuqiwoe uew</div>
-          <button className="dialog-close-btn" onClick={toggleDialog}>
+          <button className="dialog-close-btn">
             X
           </button>
         </div>

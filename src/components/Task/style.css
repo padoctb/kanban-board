@@ -11,6 +11,10 @@
   position: relative;
 }
 
+.task-container:hover {
+  box-shadow: 0 5px 5px 0px rgba(0,0,0,.2);
+}
+
 .task-description {
   margin-bottom: 20px;
 }
@@ -24,7 +28,7 @@
 }
 
 .task-container.hight {
-  border: 2px solid #E52327;
+  border: 2px solid rgb(231, 93, 0);
 }
 
 .task-delete-btn {
