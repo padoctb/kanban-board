@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './style.css';
+import PropTypes from 'prop-types';
 
 class Task extends Component {
   render() {
@@ -13,10 +14,23 @@ class Task extends Component {
         </button>}
 
         <div className="task-description">{description}</div>
-        <div className="task-date">Created: {createDate.toLocaleDateString()}</div>
+        <div className="task-date">Created: {createDate.toLocaleDateString('ru-RU', {
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric'
+        })}</div>
       </div>
     );
   }
+}
+
+Task.propTypes = {
+  taskData: PropTypes.shape({
+    priority: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    createDate: PropTypes.instanceOf(Date),
+    id: PropTypes.number.isRequired
+  })
 }
 
 export default Task;

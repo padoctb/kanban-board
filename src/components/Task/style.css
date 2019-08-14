@@ -1,6 +1,5 @@
 .task-container {
   width: 280px;
-  border: 2px solid red;
   margin: 0 auto 20px auto;
   background-color: lightgray;
   box-sizing: border-box;
@@ -12,7 +11,7 @@
 }
 
 .task-container:hover {
-  box-shadow: 0 5px 5px 0px rgba(0,0,0,.2);
+  box-shadow: 0 5px 3px 0px rgba(0,0,0,.2);
 }
 
 .task-description {
@@ -25,10 +24,12 @@
 
 .task-container.normal {
   border: 2px solid #64AB25;
+  background-color: rgb(186, 207, 182);
 }
 
 .task-container.hight {
   border: 2px solid rgb(231, 93, 0);
+  background-color: rgb(226, 178, 178);
 }
 
 .task-delete-btn {

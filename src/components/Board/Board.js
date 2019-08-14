@@ -30,7 +30,7 @@ class Board extends Component {
   }
 
   render() {
-    console.log(this.state.tasks);
+    console.log('Tasks list:', this.state.tasks);
 
     return (
       <div>
