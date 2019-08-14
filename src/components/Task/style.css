@@ -1,0 +1,41 @@
+.task-container {
+  width: 280px;
+  border: 2px solid red;
+  margin: 0 auto 20px auto;
+  background-color: lightgray;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding-right: 20px;
+  position: relative;
+}
+
+.task-description {
+  margin-bottom: 20px;
+}
+
+.task-container.low {
+  border: 2px solid gray;
+}
+
+.task-container.normal {
+  border: 2px solid #64AB25;
+}
+
+.task-container.hight {
+  border: 2px solid #E52327;
+}
+
+.task-delete-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+.task-date {
+  font-size: 14px;
+  color: rgb(83, 83, 83);
+}
