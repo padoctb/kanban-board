@@ -32,18 +32,34 @@
   background-color: rgb(226, 178, 178);
 }
 
-.task-delete-btn {
+.task-buttons {
   position: absolute;
   right: 10px;
   top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-btn {
   outline: none;
   cursor: pointer;
   border: none;
   background-color: transparent;
-  width: 20px;
-  height: 20px;
-  background-image: url('./../../assets/images/icons/remove.svg');
+  width: 18px;
+  height: 18px;
   background-size: 100% 100%;
+}
+
+.task-btn:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.task-delete-btn {
+  background-image: url('./../../assets/images/icons/remove.svg');
+}
+
+.task-edit-btn {
+  background-image: url('./../../assets/images/icons/edit.svg');
 }
 
 .task-delete-btn:hover {

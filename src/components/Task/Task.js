@@ -9,29 +9,38 @@ class Task extends Component {
 
     return (
       <div className={`task-container ${priority}`}>
-        {(status === 'done' || status === 'aborted') && <button onClick={() => deleteTask(id)} className="task-delete-btn">
-          
-        </button>}
+        <div className='task-buttons'>
+          {(status === 'done' || status === 'aborted') && (
+            <button onClick={() => deleteTask(id)} className="task-btn task-delete-btn" />
+          )}
+                    {(status === 'doIt' || status === 'inProgress') && (
+            <button onClick={() => deleteTask(id)} className="task-btn task-edit-btn" />
+          )}
+        </div>
 
         <div className="task-description">{description}</div>
-        <div className="task-date">Created: {createDate.toLocaleDateString('ru-RU', {
-          hour: 'numeric',
-          minute: 'numeric',
-          second: 'numeric'
-        })}</div>
+        <div className="task-date">
+          Created:{' '}
+          {createDate.toLocaleDateString('ru-RU', {
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+          })}
+        </div>
       </div>
     );
   }
 }
 
 Task.propTypes = {
-  taskData: PropTypes.shape({ // данные необходимые для рендера инфы в таске
-    priority: PropTypes.string.isRequired, 
+  taskData: PropTypes.shape({
+    // данные необходимые для рендера инфы в таске
+    priority: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     createDate: PropTypes.instanceOf(Date),
-    id: PropTypes.number.isRequired
+    id: PropTypes.number.isRequired,
   }),
-  deleteTask: PropTypes.func.isRequired // Board function
-}
+  deleteTask: PropTypes.func.isRequired, // Board function
+};
 
 export default Task;
