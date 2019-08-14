@@ -25,12 +25,13 @@ class Task extends Component {
 }
 
 Task.propTypes = {
-  taskData: PropTypes.shape({
-    priority: PropTypes.string.isRequired,
+  taskData: PropTypes.shape({ // данные необходимые для рендера инфы в таске
+    priority: PropTypes.string.isRequired, 
     description: PropTypes.string.isRequired,
     createDate: PropTypes.instanceOf(Date),
     id: PropTypes.number.isRequired
-  })
+  }),
+  deleteTask: PropTypes.func.isRequired // Board function
 }
 
 export default Task;

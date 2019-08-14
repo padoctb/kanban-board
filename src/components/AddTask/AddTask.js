@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Dialog from '../Dialog/Dialog';
 import './style.css';
+import PropTypes from 'prop-types';
 
-class AddTaskDialog extends Component {
+class AddTask extends Component {
 
   state = {
     descriptionInput: '',
@@ -27,6 +28,7 @@ class AddTaskDialog extends Component {
 
     return (
       <Dialog toggleDialog={toggleDialog} title='Add new task'>
+
         <div className="text">Description:</div>
         {!this.state.isValid && <div className="error-msg">Description too short!</div>}
         <textarea
@@ -59,9 +61,15 @@ class AddTaskDialog extends Component {
             toggleDialog()
           }
         }} className="add-task-btn">Add</button>
+
       </Dialog>
     );
   }
 }
 
-export default AddTaskDialog;
+AddTask.propTypes = {
+  toggleDialog: PropTypes.func.isRequired, // передаём в Dialog, Board function
+  addTask: PropTypes.func.isRequired // Board function
+}
+
+export default AddTask;
