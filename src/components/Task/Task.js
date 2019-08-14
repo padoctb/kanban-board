@@ -6,20 +6,21 @@ class Task extends Component {
   render() {
     const { priority, description, createDate, id, status } = this.props.taskData;
     const deleteTask = this.props.deleteTask;
-    const toggleEditTask = this.props.toggleEditTask
+    const toggleEditTask = this.props.toggleEditTask;
 
     return (
       <div className={`task-container ${priority}`}>
         <div className="task-buttons">
-
           {(status === 'done' || status === 'aborted') && (
             <button onClick={() => deleteTask(id)} className="task-btn task-delete-btn" />
           )}
 
           {(status === 'doIt' || status === 'inProgress') && (
-            <button onClick={() => toggleEditTask(this.props.taskData)} className="task-btn task-edit-btn" />
+            <button
+              onClick={() => toggleEditTask(this.props.taskData)}
+              className="task-btn task-edit-btn"
+            />
           )}
-
         </div>
 
         <div className="task-description">{description}</div>

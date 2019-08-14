@@ -16,7 +16,7 @@ class Dialog extends Component {
         className="dialog-wrapper"
       >
         <div className="dialog-content">
-          <button className="dialog-close-btn"></button>
+          <button className="dialog-close-btn" />
 
           <h3 className="dialog-title">{title}</h3>
 
@@ -28,9 +28,9 @@ class Dialog extends Component {
 }
 
 Dialog.propTypes = {
-  toggleDialog: PropTypes.func.isRequired, 
+  toggleDialog: PropTypes.func.isRequired,
   title: PropTypes.string,
-  children: PropTypes.node // контент диалога
-}
+  children: PropTypes.node, // контент диалога
+};
 
 export default Dialog;

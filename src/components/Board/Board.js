@@ -3,10 +3,9 @@ import tasks from './../../tasks';
 import './style.css';
 import Task from './../Task/Task';
 import AddTask from '../AddTask/AddTask';
-import EditTask from '../EditTask/EditTask'
+import EditTask from '../EditTask/EditTask';
 
 class Board extends Component {
-
   state = {
     tasks: tasks,
     isAddTaskOpen: false,
@@ -14,8 +13,8 @@ class Board extends Component {
       isOpen: false,
       taskStatus: null,
       taskId: null,
-      taskPriority: null
-    }
+      taskPriority: null,
+    },
   };
 
   deleteTask = taskId => {
@@ -26,43 +25,52 @@ class Board extends Component {
 
   toggleAddTask = () => {
     this.setState({
-      isAddTaskOpen: !this.state.isAddTaskOpen
-    })
-  }
+      isAddTaskOpen: !this.state.isAddTaskOpen,
+    });
+  };
 
   addTask = (event, taskData) => {
     this.setState({
-      tasks: [...this.state.tasks, taskData]
-    })
-  }
+      tasks: [...this.state.tasks, taskData],
+    });
+  };
 
-  toggleEditTask = ({id, description, status, priority} = {}) => {
+  toggleEditTask = ({ id, description, status, priority } = {}) => {
     this.setState({
       editTaskState: {
         isOpen: !this.state.editTaskState.isOpen,
         taskStatus: status,
         taskId: id,
         taskPriority: priority,
-        taskDescription: description
-      }
-    })
-  }
+        taskDescription: description,
+      },
+    });
+  };
 
   editTask = (newDescription, newPriority, taskId) => {
-    this.state.tasks.forEach((elem) => {
-      if(elem.id === taskId) {
-        elem.description = newDescription
-        elem.priority = newPriority
+    this.state.tasks.forEach(elem => {
+      if (elem.id === taskId) {
+        elem.description = newDescription;
+        elem.priority = newPriority;
       }
-    })
-  }
+    });
+  };
 
-  renderTasks = (status) => {
-    let filteredTasks = [...this.state.tasks].filter(task => task.status === status)
-    return filteredTasks.map((task) => {
-      return <Task toggleEditTask={this.toggleEditTask} editTask={this.editTask} deleteTask={this.deleteTask} key={task.id} taskData={task} />
-    })
-  }
+  renderTasks = status => {
+    // отбираем по статусу - рендерим в колонку
+    let filteredTasks = [...this.state.tasks].filter(task => task.status === status);
+    return filteredTasks.map(task => {
+      return (
+        <Task
+          toggleEditTask={this.toggleEditTask}
+          editTask={this.editTask}
+          deleteTask={this.deleteTask}
+          key={task.id}
+          taskData={task}
+        />
+      );
+    });
+  };
 
   render() {
     console.log('Tasks list:', this.state.tasks);
@@ -75,33 +83,25 @@ class Board extends Component {
             <div className="column">
               <h3 className="column-title">Do it</h3>
 
-              <div className="column-tasks">
-                {this.renderTasks('doIt')}
-              </div>
+              <div className="column-tasks">{this.renderTasks('doIt')}</div>
             </div>
 
             <div className="column">
               <h3 className="column-title">In Progress</h3>
 
-              <div className="column-tasks">
-                {this.renderTasks('inProgress')}
-              </div>
+              <div className="column-tasks">{this.renderTasks('inProgress')}</div>
             </div>
 
             <div className="column">
               <h3 className="column-title">Done</h3>
 
-              <div className="column-tasks">
-                {this.renderTasks('done')}
-              </div>
+              <div className="column-tasks">{this.renderTasks('done')}</div>
             </div>
 
             <div className="column">
               <h3 className="column-title">Aborted</h3>
 
-              <div className="column-tasks">
-                {this.renderTasks('aborted')}
-              </div>
+              <div className="column-tasks">{this.renderTasks('aborted')}</div>
             </div>
           </div>
 
@@ -110,8 +110,16 @@ class Board extends Component {
           </button>
         </div>
 
-        {this.state.isAddTaskOpen && <AddTask addTask={this.addTask} toggleAddTask={this.toggleAddTask}/>}
-        {this.state.editTaskState.isOpen && <EditTask taskState={this.state.editTaskState} editTask={this.editTask} toggleEditTask={this.toggleEditTask}/>}
+        {this.state.isAddTaskOpen && (
+          <AddTask addTask={this.addTask} toggleAddTask={this.toggleAddTask} />
+        )}
+        {this.state.editTaskState.isOpen && (
+          <EditTask
+            taskState={this.state.editTaskState}
+            editTask={this.editTask}
+            toggleEditTask={this.toggleEditTask}
+          />
+        )}
       </div>
     );
   }

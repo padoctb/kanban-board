@@ -31,7 +31,6 @@ class EditTask extends Component {
     return (
       <Dialog toggleDialog={toggleEditTask} title="Edit task">
         <div>
-
           {taskStatus === 'doIt' && this.description}
 
           <div className="text">Priority:</div>
@@ -53,9 +52,13 @@ class EditTask extends Component {
               else {
                 this.setState({ isValid: true });
 
-                this.props.editTask(this.state.descriptionInput, this.state.currentPriority, taskId); // передаём измененные данные
+                this.props.editTask(
+                  this.state.descriptionInput,
+                  this.state.currentPriority,
+                  taskId,
+                ); // передаём измененные данные
 
-                this.props.toggleEditTask(); 
+                this.props.toggleEditTask();
               }
             }}
             className="add-task-btn"
@@ -88,10 +91,10 @@ EditTask.propTypes = {
     taskDescription: PropTypes.string.isRequired,
     taskId: PropTypes.number.isRequired,
     taskPriority: PropTypes.string.isRequired,
-    taskStatus: PropTypes.string.isRequired
+    taskStatus: PropTypes.string.isRequired,
   }),
   editTask: PropTypes.func.isRequired, // from Board
-  toggleEditTask: PropTypes.func.isRequired // from Board
-}
+  toggleEditTask: PropTypes.func.isRequired, // from Board
+};
 
 export default EditTask;
