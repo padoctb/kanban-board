@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import tasks from './../../tasks';
 import './style.css';
 import Task from './../Task/Task';
-import AddTaskDialog from './../AddTaskDialog/AddTaskDialog';
+import AddTaskDialog from '../AddTask/AddTask';
 
 class Board extends Component {
 
   state = {
     tasks: tasks,
-    isDialogOpen: false,
+    isDialogOpen: true,
   };
 
   deleteTask = taskId => {
