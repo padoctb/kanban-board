@@ -9,7 +9,7 @@
 }
 
 .board-container {
-    border: 3px solid gray;
+    border: 3px solid rgb(49, 49, 49);
     border-radius: 5px;
     display: flex;
 }
@@ -19,13 +19,17 @@
 }
 
 .column:not(:first-child) {
-    border-left: 2px solid gray;
+    border-left: 3px solid rgb(49, 49, 49);;
 }
 
 .column-title {
     text-align: center;
+    margin: 0;
+    padding-top: 20px;
     padding-bottom: 20px;
-    border-bottom: 2px solid gray;
+    border-bottom: 3px solid #fff;
+    background-color: rgb(49, 49, 49);
+    color: #fff;
 }
 
 .add-task {

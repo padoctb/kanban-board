@@ -10,7 +10,7 @@ class Task extends Component {
     return (
       <div className={`task-container ${priority}`}>
         {(status === 'done' || status === 'aborted') && <button onClick={() => deleteTask(id)} className="task-delete-btn">
-          X
+          
         </button>}
 
         <div className="task-description">{description}</div>
