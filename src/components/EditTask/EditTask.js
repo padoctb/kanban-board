@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 class EditTask extends Component {
   state = {
-    descriptionInput: this.props.taskState.taskDescription,
+    descriptionInput: this.props.taskState.taskDescription, // пускаем в state текущие данные таска
     currentPriority: this.props.taskState.taskPriority,
     isValid: true,
   };
@@ -25,7 +25,7 @@ class EditTask extends Component {
   render() {
     const {
       toggleEditTask,
-      taskState: { taskStatus, taskId, taskPriority },
+      taskState: { taskStatus, taskId },
     } = this.props;
 
     return (
@@ -53,9 +53,9 @@ class EditTask extends Component {
               else {
                 this.setState({ isValid: true });
 
-                this.props.editTask(this.state.descriptionInput, this.state.currentPriority, taskId);
+                this.props.editTask(this.state.descriptionInput, this.state.currentPriority, taskId); // передаём измененные данные
 
-                this.props.toggleEditTask();
+                this.props.toggleEditTask(); 
               }
             }}
             className="add-task-btn"
@@ -81,6 +81,17 @@ class EditTask extends Component {
       </div>
     );
   }
+}
+
+EditTask.propTypes = {
+  taskState: PropTypes.shape({
+    taskDescription: PropTypes.string.isRequired,
+    taskId: PropTypes.number.isRequired,
+    taskPriority: PropTypes.string.isRequired,
+    taskStatus: PropTypes.string.isRequired
+  }),
+  editTask: PropTypes.func.isRequired, // from Board
+  toggleEditTask: PropTypes.func.isRequired // from Board
 }
 
 export default EditTask;

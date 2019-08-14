@@ -49,7 +49,6 @@ class Board extends Component {
   }
 
   editTask = (newDescription, newPriority, taskId) => {
-    console.log(newPriority)
     this.state.tasks.forEach((elem) => {
       if(elem.id === taskId) {
         elem.description = newDescription
