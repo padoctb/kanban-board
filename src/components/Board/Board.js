@@ -57,6 +57,13 @@ class Board extends Component {
     })
   }
 
+  renderTasks = (status) => {
+    let filteredTasks = [...this.state.tasks].filter(task => task.status === status)
+    return filteredTasks.map((task) => {
+      return <Task toggleEditTask={this.toggleEditTask} editTask={this.editTask} deleteTask={this.deleteTask} key={task.id} taskData={task} />
+    })
+  }
+
   render() {
     console.log('Tasks list:', this.state.tasks);
 
@@ -69,13 +76,7 @@ class Board extends Component {
               <h3 className="column-title">Do it</h3>
 
               <div className="column-tasks">
-                {this.state.tasks.map((task, i) => {
-                  return (
-                    task.status === 'doIt' && (
-                      <Task toggleEditTask={this.toggleEditTask} editTask={this.editTask} deleteTask={this.deleteTask} key={task.id} taskData={task} />
-                    )
-                  );
-                })}
+                {this.renderTasks('doIt')}
               </div>
             </div>
 
@@ -83,13 +84,7 @@ class Board extends Component {
               <h3 className="column-title">In Progress</h3>
 
               <div className="column-tasks">
-                {this.state.tasks.map((task, i) => {
-                  return (
-                    task.status === 'inProgress' && (
-                      <Task toggleEditTask={this.toggleEditTask} editTask={this.editTask} deleteTask={this.deleteTask} key={task.id} taskData={task} />
-                    )
-                  );
-                })}
+                {this.renderTasks('inProgress')}
               </div>
             </div>
 
@@ -97,13 +92,7 @@ class Board extends Component {
               <h3 className="column-title">Done</h3>
 
               <div className="column-tasks">
-                {this.state.tasks.map((task, i) => {
-                  return (
-                    task.status === 'done' && (
-                      <Task toggleEditTask={this.toggleEditTask} editTask={this.editTask} deleteTask={this.deleteTask} key={task.id} taskData={task} />
-                    )
-                  );
-                })}
+                {this.renderTasks('done')}
               </div>
             </div>
 
@@ -111,13 +100,7 @@ class Board extends Component {
               <h3 className="column-title">Aborted</h3>
 
               <div className="column-tasks">
-                {this.state.tasks.map((task, i) => {
-                  return (
-                    task.status === 'aborted' && (
-                      <Task toggleEditTask={this.toggleEditTask} editTask={this.editTask} deleteTask={this.deleteTask} key={task.id} taskData={task} />
-                    )
-                  );
-                })}
+                {this.renderTasks('aborted')}
               </div>
             </div>
           </div>
