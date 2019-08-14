@@ -16,7 +16,7 @@ class Dialog extends Component {
         className="dialog-wrapper"
       >
         <div className="dialog-content">
-          <button className="dialog-close-btn">X</button>
+          <button className="dialog-close-btn"></button>
 
           <h3 className="dialog-title">{title}</h3>
 

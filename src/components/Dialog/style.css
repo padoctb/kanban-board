@@ -19,7 +19,7 @@
   width: 500px;
   min-height: 350px;
   background-color: #fff;
-  border: 3px solid gray;
+  border: 3px solid rgb(177, 177, 177);
   border-radius: 5px;
   position: relative;
   color: #000;
@@ -31,4 +31,14 @@
   right: 20px;
   top: 20px;
   cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background-image: url('./../../assets/images/icons/cancel.svg');
+  background-size: 100% 100%;
+  background-color: transparent;
+  border: none;
+}
+
+.dialog-close-btn:hover {
+  opacity: .8;
 }
