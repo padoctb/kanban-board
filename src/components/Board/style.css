@@ -4,6 +4,10 @@
     padding-top: 200px;
 }
 
+.board-title {
+    color: rgb(32, 32, 32);
+}
+
 .board-container {
     border: 3px solid gray;
     border-radius: 5px;

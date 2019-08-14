@@ -5,6 +5,7 @@ import Task from './../Task/Task';
 import AddTaskDialog from './../AddTaskDialog/AddTaskDialog';
 
 class Board extends Component {
+
   state = {
     tasks: tasks,
     isDialogOpen: false,
@@ -16,13 +17,19 @@ class Board extends Component {
     });
   };
 
+  toggleDialog = () => {
+    this.setState({
+      isDialogOpen: !this.state.isDialogOpen
+    })
+  }
+
   render() {
     console.log(this.state.tasks);
 
     return (
       <div>
         <div className="board-wrapper">
-          Kanban board
+          <h1 className="board-title">Kanban Board</h1>
           <div className="board-container">
             <div className="column">
               <h3 className="column-title">Do it</h3>
@@ -80,11 +87,13 @@ class Board extends Component {
               </div>
             </div>
           </div>
-          <button onClick={() => this.setState({})} className="add-task">
+
+          <button onClick={this.toggleDialog} className="add-task">
             Add Task
           </button>
         </div>
-        {this.state.isDialogOpen && <AddTaskDialog />}
+
+        {this.state.isDialogOpen && <AddTaskDialog toggleDialog={this.toggleDialog}/>}
       </div>
     );
   }
