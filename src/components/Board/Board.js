@@ -8,7 +8,7 @@ class Board extends Component {
 
   state = {
     tasks: tasks,
-    isDialogOpen: true,
+    isDialogOpen: false,
   };
 
   deleteTask = taskId => {
@@ -20,6 +20,12 @@ class Board extends Component {
   toggleDialog = () => {
     this.setState({
       isDialogOpen: !this.state.isDialogOpen
+    })
+  }
+
+  addTask = (event, taskData) => {
+    this.setState({
+      tasks: [...this.state.tasks, taskData]
     })
   }
 
@@ -93,7 +99,7 @@ class Board extends Component {
           </button>
         </div>
 
-        {this.state.isDialogOpen && <AddTaskDialog toggleDialog={this.toggleDialog}/>}
+        {this.state.isDialogOpen && <AddTaskDialog addTask={this.addTask} toggleDialog={this.toggleDialog}/>}
       </div>
     );
   }

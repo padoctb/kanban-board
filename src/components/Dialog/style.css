@@ -17,7 +17,7 @@
 
 .dialog-content {
   width: 500px;
-  min-height: 400px;
+  min-height: 350px;
   background-color: #fff;
   border: 3px solid gray;
   border-radius: 5px;
@@ -30,4 +30,5 @@
   position: absolute;
   right: 20px;
   top: 20px;
+  cursor: pointer;
 }

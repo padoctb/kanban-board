@@ -17,7 +17,7 @@ class Dialog extends Component {
         <div className="dialog-content">
           <button className="dialog-close-btn">X</button>
 
-          <h3>{title}</h3>
+          <h3 className="dialog-title">{title}</h3>
 
           {children}
         </div>
