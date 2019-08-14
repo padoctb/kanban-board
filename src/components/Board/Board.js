@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import tasks from './../../tasks';
 import './style.css';
 import Task from './../Task/Task';
-import AddTaskDialog from '../AddTask/AddTask';
+import AddTask from '../AddTask/AddTask';
+import EditTask from '../EditTask/EditTask'
 
 class Board extends Component {
 
   state = {
     tasks: tasks,
-    isDialogOpen: false,
+    isAddTaskOpen: false,
+    editTaskState: {
+      isOpen: false,
+      taskStatus: null,
+      taskId: null,
+      taskPriority: null
+    }
   };
 
   deleteTask = taskId => {
@@ -17,15 +24,37 @@ class Board extends Component {
     });
   };
 
-  toggleDialog = () => {
+  toggleAddTask = () => {
     this.setState({
-      isDialogOpen: !this.state.isDialogOpen
+      isAddTaskOpen: !this.state.isAddTaskOpen
     })
   }
 
   addTask = (event, taskData) => {
     this.setState({
       tasks: [...this.state.tasks, taskData]
+    })
+  }
+
+  toggleEditTask = ({id, description, status, priority} = {}) => {
+    this.setState({
+      editTaskState: {
+        isOpen: !this.state.editTaskState.isOpen,
+        taskStatus: status,
+        taskId: id,
+        taskPriority: priority,
+        taskDescription: description
+      }
+    })
+  }
+
+  editTask = (newDescription, newPriority, taskId) => {
+    console.log(newPriority)
+    this.state.tasks.forEach((elem) => {
+      if(elem.id === taskId) {
+        elem.description = newDescription
+        elem.priority = newPriority
+      }
     })
   }
 
@@ -44,7 +73,7 @@ class Board extends Component {
                 {this.state.tasks.map((task, i) => {
                   return (
                     task.status === 'doIt' && (
-                      <Task deleteTask={this.deleteTask} key={task.id} taskData={task} />
+                      <Task toggleEditTask={this.toggleEditTask} editTask={this.editTask} deleteTask={this.deleteTask} key={task.id} taskData={task} />
                     )
                   );
                 })}
@@ -58,7 +87,7 @@ class Board extends Component {
                 {this.state.tasks.map((task, i) => {
                   return (
                     task.status === 'inProgress' && (
-                      <Task deleteTask={this.deleteTask} key={task.id} taskData={task} />
+                      <Task toggleEditTask={this.toggleEditTask} editTask={this.editTask} deleteTask={this.deleteTask} key={task.id} taskData={task} />
                     )
                   );
                 })}
@@ -72,7 +101,7 @@ class Board extends Component {
                 {this.state.tasks.map((task, i) => {
                   return (
                     task.status === 'done' && (
-                      <Task deleteTask={this.deleteTask} key={task.id} taskData={task} />
+                      <Task toggleEditTask={this.toggleEditTask} editTask={this.editTask} deleteTask={this.deleteTask} key={task.id} taskData={task} />
                     )
                   );
                 })}
@@ -86,7 +115,7 @@ class Board extends Component {
                 {this.state.tasks.map((task, i) => {
                   return (
                     task.status === 'aborted' && (
-                      <Task deleteTask={this.deleteTask} key={task.id} taskData={task} />
+                      <Task toggleEditTask={this.toggleEditTask} editTask={this.editTask} deleteTask={this.deleteTask} key={task.id} taskData={task} />
                     )
                   );
                 })}
@@ -94,12 +123,13 @@ class Board extends Component {
             </div>
           </div>
 
-          <button onClick={this.toggleDialog} className="add-task">
+          <button onClick={this.toggleAddTask} className="add-task">
             Add Task
           </button>
         </div>
 
-        {this.state.isDialogOpen && <AddTaskDialog addTask={this.addTask} toggleDialog={this.toggleDialog}/>}
+        {this.state.isAddTaskOpen && <AddTask addTask={this.addTask} toggleAddTask={this.toggleAddTask}/>}
+        {this.state.editTaskState.isOpen && <EditTask taskState={this.state.editTaskState} editTask={this.editTask} toggleEditTask={this.toggleEditTask}/>}
       </div>
     );
   }

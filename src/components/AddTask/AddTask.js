@@ -24,10 +24,10 @@ class AddTask extends Component {
   };
 
   render() {
-    const { toggleDialog, addTask } = this.props;
+    const { toggleAddTask, addTask } = this.props;
 
     return (
-      <Dialog toggleDialog={toggleDialog} title='Add new task'>
+      <Dialog toggleDialog={toggleAddTask} title='Add new task'>
 
         <div className="text">Description:</div>
         {!this.state.isValid && <div className="error-msg">Description too short!</div>}
@@ -58,7 +58,7 @@ class AddTask extends Component {
               id: Date.now() + Math.random()
             })
 
-            toggleDialog()
+            toggleAddTask()
           }
         }} className="add-task-btn">Add</button>
 
@@ -68,7 +68,7 @@ class AddTask extends Component {
 }
 
 AddTask.propTypes = {
-  toggleDialog: PropTypes.func.isRequired, // передаём в Dialog, Board function
+  toggleAddTask: PropTypes.func.isRequired, // передаём в Dialog, Board function
   addTask: PropTypes.func.isRequired // Board function
 }
 
