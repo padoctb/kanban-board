@@ -65,7 +65,7 @@ class AddTask extends Component {
               toggleAddTask();
             }
           }}
-          className="add-task-btn"
+          className="task-control-btn full-size"
         >
           Add
         </button>

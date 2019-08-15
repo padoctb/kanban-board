@@ -8,6 +8,8 @@ body {
     min-width: 700px;
 }
 
+/* ui elements */
+
 .dialog-textarea {
   width: 100%;
   min-height: 100px;
@@ -33,18 +35,26 @@ body {
   padding: 5px;
 }
   
-.add-task-btn {
-  padding: 5px;
-  font-size: 18px;
-  margin-top: 20px;
-  width: 100%;
-  cursor: pointer;
-}
-  
 .error-msg {
   color: rgb(201, 36, 36);
   font-size: 14px;
   margin-bottom: 5px;
+}
+
+.task-control-btn {
+  margin-top: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  background-color: rgb(49, 49, 49);
+  padding: 10px 30px;
+  border-radius: 5px;
+  color: #fff;
+  outline: none;
+}
+
+.task-control-btn.full-size {
+  width: 100%;
 }
 
 /* tr-group-styles */

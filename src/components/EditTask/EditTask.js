@@ -61,7 +61,7 @@ class EditTask extends Component {
                 this.props.toggleEditTask();
               }
             }}
-            className="add-task-btn"
+            className="task-control-btn full-size"
           >
             Edit
           </button>
