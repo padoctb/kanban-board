@@ -4,6 +4,7 @@ import './style.css';
 import Task from './../Task/Task';
 import AddTask from '../AddTask/AddTask';
 import EditTask from '../EditTask/EditTask';
+import { Draggable, Droppable } from 'react-drag-and-drop';
 
 class Board extends Component {
   state = {
@@ -56,27 +57,46 @@ class Board extends Component {
     });
   };
 
+  onDrop = (data, e) => {
+    let column = e.target.closest('.column') // ищем ближайший род. элемент, если он есть - продолжаем
+    if (column) {
+      let droppedColumnType = column.getAttribute('data-status');
+      let droppedTaskId = Number(Object.values(data).filter(id => Number(id) !== 0)[0]);
+
+      let newTasks = [...this.state.tasks];
+
+      newTasks.forEach(task => {
+        if (task.id === droppedTaskId) task.status = droppedColumnType; // меняем статус нужного таска на тот который указан в родительском data-status
+      });
+
+      this.setState({
+        tasks: newTasks,
+      });
+    }
+  };
+
   renderTasks = status => {
     // отбираем по статусу - рендерим в колонку
     let filteredTasks = [...this.state.tasks].filter(task => task.status === status);
     // сортируем по приоритету и дате создания
     filteredTasks = filteredTasks.sort((taskA, taskB) => {
-      if(taskA.priority === 'normal' && taskB.priority === 'hight') return 1
-      if(taskA.priority === 'low' && taskB.priority === 'hight') return 1
-      if(taskA.priority === 'low' && taskB.priority === 'normal') return 1
+      if (taskA.priority === 'normal' && taskB.priority === 'hight') return 1;
+      if (taskA.priority === 'low' && taskB.priority === 'hight') return 1;
+      if (taskA.priority === 'low' && taskB.priority === 'normal') return 1;
       if (Number(taskB.createDate) < Number(taskA.createDate)) return -1;
       if (Number(taskB.createDate) > Number(taskA.createDate)) return 1;
       return 0;
-    })
+    });
     return filteredTasks.map(task => {
       return (
-        <Task
-          toggleEditTask={this.toggleEditTask}
-          editTask={this.editTask}
-          deleteTask={this.deleteTask}
-          key={task.id}
-          taskData={task}
-        />
+        <Draggable type={task.status.toLowerCase()} data={task.id} key={task.id}>
+          <Task
+            toggleEditTask={this.toggleEditTask}
+            editTask={this.editTask}
+            deleteTask={this.deleteTask}
+            taskData={task}
+          />
+        </Draggable>
       );
     });
   };
@@ -89,29 +109,44 @@ class Board extends Component {
         <div className="board-wrapper">
           <h1 className="board-title">Kanban Board</h1>
           <div className="board-container">
-            <div className="column">
+            <Droppable data-status="doIt" onDrop={this.onDrop} types={['']} className="column">
               <h3 className="column-title">Do it</h3>
 
               <div className="column-tasks">{this.renderTasks('doIt')}</div>
-            </div>
+            </Droppable>
 
-            <div className="column">
+            <Droppable
+              data-status="inProgress"
+              onDrop={this.onDrop}
+              types={['doit']}
+              className="column"
+            >
               <h3 className="column-title">In Progress</h3>
 
               <div className="column-tasks">{this.renderTasks('inProgress')}</div>
-            </div>
+            </Droppable>
 
-            <div className="column">
+            <Droppable
+              data-status="done"
+              onDrop={this.onDrop}
+              types={['inprogress']}
+              className="column"
+            >
               <h3 className="column-title">Done</h3>
 
               <div className="column-tasks">{this.renderTasks('done')}</div>
-            </div>
+            </Droppable>
 
-            <div className="column">
+            <Droppable
+              data-status="aborted"
+              onDrop={this.onDrop}
+              types={['inprogress', 'doit']}
+              className="column"
+            >
               <h3 className="column-title">Aborted</h3>
 
               <div className="column-tasks">{this.renderTasks('aborted')}</div>
-            </div>
+            </Droppable>
           </div>
 
           <button onClick={this.toggleAddTask} className="add-task">

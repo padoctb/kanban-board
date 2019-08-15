@@ -6,6 +6,7 @@
     "prop-types": "^15.7.2",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
+    "react-drag-and-drop": "^2.4.0",
     "react-scripts": "3.1.0"
   },
   "scripts": {
