@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import tasks from './../../tasks';
 import './style.css';
 import Task from './../Task/Task';
 import AddTask from '../AddTask/AddTask';
@@ -34,7 +33,10 @@ class Board extends Component {
   };
 
   addTask = (event, taskData) => {
-    localStorage.setItem('tasks', JSON.stringify([...this.state.tasks, taskData]))
+
+    let newTasks = [...this.state.tasks, taskData]
+
+    localStorage.setItem('tasks', JSON.stringify(newTasks))
 
     this.setState({
       tasks: JSON.parse(localStorage.getItem('tasks')),
