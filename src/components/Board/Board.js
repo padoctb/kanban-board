@@ -51,12 +51,19 @@ class Board extends Component {
   };
 
   editTask = (newDescription, newPriority, taskId) => {
-    this.state.tasks.forEach(elem => {
+    let newTasks = [...this.state.tasks]
+    newTasks.forEach(elem => {
       if (elem.id === taskId) {
         elem.description = newDescription;
         elem.priority = newPriority;
       }
     });
+
+    localStorage.setItem('tasks', JSON.stringify(newTasks))
+
+    this.setState({
+      tasks: JSON.parse(localStorage.getItem('tasks'))
+    })
   };
 
   onDrop = (data, e) => {
