@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import './style.css';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Dialog extends Component {
   render() {
     const { toggleDialog, title, children } = this.props;
 
     return (
+      <ReactCSSTransitionGroup
+      transitionName="dialog"
+      transitionAppear={true}
+      transitionAppearTimeout={300}
+      transitionEnter={false}
+      transitionLeave={false}>
       <div
         onClick={e =>
           e.target.className === 'dialog-wrapper' || e.target.className === 'dialog-close-btn'
@@ -23,6 +30,7 @@ class Dialog extends Component {
           {children}
         </div>
       </div>
+      </ReactCSSTransitionGroup>
     );
   }
 }

@@ -59,3 +59,12 @@ body {
   transition: .3s ease;
   transform: translateY(0px);
 }
+
+.dialog-appear {
+  opacity: 0.01;
+}
+
+.dialog-appear.dialog-appear-active {
+  opacity: 1;
+  transition: .3s ease;
+}
