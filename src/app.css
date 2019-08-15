@@ -46,3 +46,16 @@ body {
   font-size: 14px;
   margin-bottom: 5px;
 }
+
+/* tr-group-styles */
+
+.task-appear {
+  opacity: 0.01;
+  transform: translateY(-20px);
+}
+
+.task-appear.task-appear-active {
+  opacity: 1;
+  transition: .3s ease;
+  transform: translateY(0px);
+}

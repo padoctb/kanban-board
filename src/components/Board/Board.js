@@ -4,6 +4,7 @@ import Task from './../Task/Task';
 import AddTask from '../AddTask/AddTask';
 import EditTask from '../EditTask/EditTask';
 import { Draggable, Droppable } from 'react-drag-and-drop';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Board extends Component {
   state = {
@@ -113,6 +114,12 @@ class Board extends Component {
     return filteredTasks.map(task => {
       // статус сделан tolcase (библиотека приняла решение отказаться работать с camelCase (???))
       return (
+        <ReactCSSTransitionGroup
+        transitionName="task"
+        transitionAppear={true}
+        transitionAppearTimeout={300}
+        transitionEnter={false}
+        transitionLeave={false}>
         <Draggable type={task.status.toLowerCase()} data={task.id} key={task.id}> 
           <Task
             toggleEditTask={this.toggleEditTask}
@@ -121,6 +128,7 @@ class Board extends Component {
             taskData={task}
           />
         </Draggable>
+        </ReactCSSTransitionGroup>
       );
     });
   };

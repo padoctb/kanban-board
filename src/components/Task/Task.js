@@ -3,6 +3,7 @@ import './style.css';
 import PropTypes from 'prop-types';
 
 class Task extends Component {
+  
   render() {
     const { priority, description, createDate, id, status } = this.props.taskData;
     const deleteTask = this.props.deleteTask;
