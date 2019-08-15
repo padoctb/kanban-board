@@ -26,7 +26,7 @@ class Task extends Component {
         <div className="task-description">{description}</div>
         <div className="task-date">
           Created:{' '}
-          {createDate.toLocaleDateString('ru-RU', {
+          {new Date(createDate).toLocaleDateString('ru-RU', {
             hour: 'numeric',
             minute: 'numeric',
             second: 'numeric',
@@ -42,7 +42,7 @@ Task.propTypes = {
     // данные необходимые для рендера инфы в таске
     priority: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    createDate: PropTypes.instanceOf(Date),
+    createDate: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }),
   deleteTask: PropTypes.func.isRequired, // Board function

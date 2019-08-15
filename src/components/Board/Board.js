@@ -8,7 +8,7 @@ import { Draggable, Droppable } from 'react-drag-and-drop';
 
 class Board extends Component {
   state = {
-    tasks: tasks,
+    tasks: JSON.parse(localStorage.getItem('tasks')),
     isAddTaskOpen: false,
     editTaskState: {
       isOpen: false,
@@ -31,8 +31,10 @@ class Board extends Component {
   };
 
   addTask = (event, taskData) => {
+    localStorage.setItem('tasks', JSON.stringify([...this.state.tasks, taskData]))
+    console.log(localStorage)
     this.setState({
-      tasks: [...this.state.tasks, taskData],
+      tasks: JSON.parse(localStorage.getItem('tasks')),
     });
   };
 
@@ -76,6 +78,7 @@ class Board extends Component {
   };
 
   renderTasks = status => {
+    console.log(this.state.tasks)
     // отбираем по статусу - рендерим в колонку
     let filteredTasks = [...this.state.tasks].filter(task => task.status === status);
     // сортируем по приоритету и дате создания
@@ -83,13 +86,14 @@ class Board extends Component {
       if (taskA.priority === 'normal' && taskB.priority === 'hight') return 1;
       if (taskA.priority === 'low' && taskB.priority === 'hight') return 1;
       if (taskA.priority === 'low' && taskB.priority === 'normal') return 1;
-      if (Number(taskB.createDate) < Number(taskA.createDate)) return -1;
-      if (Number(taskB.createDate) > Number(taskA.createDate)) return 1;
+      if (Number(new Date(taskB.createDate)) < Number(new Date(taskA.createDate))) return -1;
+      if (Number(new Date(taskB.createDate)) > Number(new Date(taskA.createDate))) return 1;
       return 0;
     });
     return filteredTasks.map(task => {
+      // статус сделан tolcase (библиотека приняла решение отказаться работать с camelCase (???))
       return (
-        <Draggable type={task.status.toLowerCase()} data={task.id} key={task.id}>
+        <Draggable type={task.status.toLowerCase()} data={task.id} key={task.id}> 
           <Task
             toggleEditTask={this.toggleEditTask}
             editTask={this.editTask}
@@ -102,7 +106,6 @@ class Board extends Component {
   };
 
   render() {
-    console.log('Tasks list:', this.state.tasks);
 
     return (
       <div>
