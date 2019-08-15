@@ -5,6 +5,7 @@ body {
     margin: 0;
     position: relative;
     min-height: 100vh;
+    min-width: 700px;
 }
 
 .dialog-textarea {
