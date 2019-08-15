@@ -71,6 +71,13 @@ class Board extends Component {
     })
   };
 
+  removeAllTasks = () => {
+    localStorage.setItem('tasks', JSON.stringify([]))
+    this.setState({
+      tasks: JSON.parse(localStorage.getItem('tasks'))
+    })
+  }
+
   onDrop = (data, e) => {
     let column = e.target.closest('.column') // ищем ближайший род. элемент, если он есть - продолжаем
     if (column) {
@@ -165,9 +172,12 @@ class Board extends Component {
             </Droppable>
           </div>
 
-          <button onClick={this.toggleAddTask} className="add-task">
+          <button onClick={this.toggleAddTask} className="task-control-btn">
             Add Task
           </button>
+          {this.state.tasks.length > 0 && <button onClick={this.removeAllTasks} className="task-control-btn">
+            Remove all tasks
+          </button>}
         </div>
 
         {this.state.isAddTaskOpen && (
