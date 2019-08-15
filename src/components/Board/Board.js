@@ -19,8 +19,11 @@ class Board extends Component {
   };
 
   deleteTask = taskId => {
+    let newTasks = this.state.tasks.filter(task => task.id !== taskId)
+    localStorage.setItem('tasks', JSON.stringify(newTasks))
+
     this.setState({
-      tasks: this.state.tasks.filter(task => task.id !== taskId),
+      tasks: JSON.parse(localStorage.getItem('tasks')),
     });
   };
 
@@ -32,7 +35,7 @@ class Board extends Component {
 
   addTask = (event, taskData) => {
     localStorage.setItem('tasks', JSON.stringify([...this.state.tasks, taskData]))
-    console.log(localStorage)
+
     this.setState({
       tasks: JSON.parse(localStorage.getItem('tasks')),
     });
