@@ -23,8 +23,15 @@ let tasks = [
   {
     description: 'test task2',
     priority: 'normal',
-    createDate: new Date(2019, 7, 20),
+    createDate: new Date(2019, 7, 2),
     id: 34343,
+    status: 'inProgress',
+  },
+  {
+    description: 'test task2',
+    priority: 'normal',
+    createDate: new Date(2019, 7, 3),
+    id: 343423,
     status: 'inProgress',
   },
   {
