@@ -59,8 +59,14 @@ class Board extends Component {
   renderTasks = status => {
     // отбираем по статусу - рендерим в колонку
     let filteredTasks = [...this.state.tasks].filter(task => task.status === status);
+    // сортируем по приоритету и дате создания
     filteredTasks = filteredTasks.sort((taskA, taskB) => {
-      return Number(taskB.createDate) - Number(taskA.createDate)
+      if(taskA.priority === 'normal' && taskB.priority === 'hight') return 1
+      if(taskA.priority === 'low' && taskB.priority === 'hight') return 1
+      if(taskA.priority === 'low' && taskB.priority === 'normal') return 1
+      if (Number(taskB.createDate) < Number(taskA.createDate)) return -1;
+      if (Number(taskB.createDate) > Number(taskA.createDate)) return 1;
+      return 0;
     })
     return filteredTasks.map(task => {
       return (
