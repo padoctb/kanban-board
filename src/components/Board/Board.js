@@ -71,14 +71,15 @@ class Board extends Component {
         if (task.id === droppedTaskId) task.status = droppedColumnType; // меняем статус нужного таска на тот который указан в родительском data-status
       });
 
+      localStorage.setItem('tasks', JSON.stringify(newTasks))
+
       this.setState({
-        tasks: newTasks,
+        tasks: JSON.parse(localStorage.getItem('tasks')),
       });
     }
   };
 
   renderTasks = status => {
-    console.log(this.state.tasks)
     // отбираем по статусу - рендерим в колонку
     let filteredTasks = [...this.state.tasks].filter(task => task.status === status);
     // сортируем по приоритету и дате создания
