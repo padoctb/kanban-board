@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import './style.css';
 import PropTypes from 'prop-types';
 
-class Task extends Component {
-  
+class Task extends PureComponent {
   render() {
     const { priority, description, createDate, id, status } = this.props.taskData;
     const deleteTask = this.props.deleteTask;

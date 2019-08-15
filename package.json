@@ -10,8 +10,7 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^15.6.2",
     "react-drag-and-drop": "^2.4.0",
-    "react-scripts": "3.1.0",
-    "react-transition-group": "^4.2.2"
+    "react-scripts": "3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

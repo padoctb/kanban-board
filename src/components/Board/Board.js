@@ -19,8 +19,8 @@ class Board extends Component {
   };
 
   deleteTask = taskId => {
-    let newTasks = this.state.tasks.filter(task => task.id !== taskId)
-    localStorage.setItem('tasks', JSON.stringify(newTasks))
+    let newTasks = this.state.tasks.filter(task => task.id !== taskId);
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
 
     this.setState({
       tasks: JSON.parse(localStorage.getItem('tasks')),
@@ -34,10 +34,9 @@ class Board extends Component {
   };
 
   addTask = (event, taskData) => {
+    let newTasks = [...this.state.tasks, taskData];
 
-    let newTasks = [...this.state.tasks, taskData]
-
-    localStorage.setItem('tasks', JSON.stringify(newTasks))
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
 
     this.setState({
       tasks: JSON.parse(localStorage.getItem('tasks')),
@@ -57,7 +56,7 @@ class Board extends Component {
   };
 
   editTask = (newDescription, newPriority, taskId) => {
-    let newTasks = [...this.state.tasks]
+    let newTasks = [...this.state.tasks];
     newTasks.forEach(elem => {
       if (elem.id === taskId) {
         elem.description = newDescription;
@@ -65,22 +64,22 @@ class Board extends Component {
       }
     });
 
-    localStorage.setItem('tasks', JSON.stringify(newTasks))
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
 
     this.setState({
-      tasks: JSON.parse(localStorage.getItem('tasks'))
-    })
+      tasks: JSON.parse(localStorage.getItem('tasks')),
+    });
   };
 
   removeAllTasks = () => {
-    localStorage.setItem('tasks', JSON.stringify([]))
+    localStorage.setItem('tasks', JSON.stringify([]));
     this.setState({
-      tasks: JSON.parse(localStorage.getItem('tasks'))
-    })
-  }
+      tasks: JSON.parse(localStorage.getItem('tasks')),
+    });
+  };
 
   onDrop = (data, e) => {
-    let column = e.target.closest('.column') // ищем ближайший род. элемент, если он есть - продолжаем
+    let column = e.target.closest('.column'); // ищем ближайший род. элемент, если он есть - продолжаем
     if (column) {
       let droppedColumnType = column.getAttribute('data-status');
       let droppedTaskId = Number(Object.values(data).filter(id => Number(id) !== 0)[0]);
@@ -91,7 +90,7 @@ class Board extends Component {
         if (task.id === droppedTaskId) task.status = droppedColumnType; // меняем статус нужного таска на тот который указан в родительском data-status
       });
 
-      localStorage.setItem('tasks', JSON.stringify(newTasks))
+      localStorage.setItem('tasks', JSON.stringify(newTasks));
 
       this.setState({
         tasks: JSON.parse(localStorage.getItem('tasks')),
@@ -115,28 +114,27 @@ class Board extends Component {
       // статус сделан tolcase (библиотека приняла решение отказаться работать с camelCase (???))
       return (
         <ReactCSSTransitionGroup
-        transitionName="task"
-        transitionAppear={true}
-        transitionAppearTimeout={300}
-        transitionEnter={false}
-        transitionLeave={false}
-        key={task.id}
+          transitionName="task"
+          transitionAppear={true}
+          transitionAppearTimeout={300}
+          transitionEnter={false}
+          transitionLeave={false}
+          key={task.id}
         >
-        <Draggable type={task.status.toLowerCase()} data={task.id}> 
-          <Task
-            toggleEditTask={this.toggleEditTask}
-            editTask={this.editTask}
-            deleteTask={this.deleteTask}
-            taskData={task}
-          />
-        </Draggable>
+          <Draggable type={task.status.toLowerCase()} data={task.id}>
+            <Task
+              toggleEditTask={this.toggleEditTask}
+              editTask={this.editTask}
+              deleteTask={this.deleteTask}
+              taskData={task}
+            />
+          </Draggable>
         </ReactCSSTransitionGroup>
       );
     });
   };
 
   render() {
-
     return (
       <div>
         <div className="board-wrapper">
@@ -185,9 +183,11 @@ class Board extends Component {
           <button onClick={this.toggleAddTask} className="task-control-btn">
             Add Task
           </button>
-          {this.state.tasks.length > 0 && <button onClick={this.removeAllTasks} className="task-control-btn">
-            Remove all tasks
-          </button>}
+          {this.state.tasks.length > 0 && (
+            <button onClick={this.removeAllTasks} className="task-control-btn">
+              Remove all tasks
+            </button>
+          )}
         </div>
 
         {this.state.isAddTaskOpen && (

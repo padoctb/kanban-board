@@ -9,27 +9,28 @@ class Dialog extends Component {
 
     return (
       <ReactCSSTransitionGroup
-      transitionName="dialog"
-      transitionAppear={true}
-      transitionAppearTimeout={300}
-      transitionEnter={false}
-      transitionLeave={false}>
-      <div
-        onClick={e =>
-          e.target.className === 'dialog-wrapper' || e.target.className === 'dialog-close-btn'
-            ? toggleDialog()
-            : null
-        }
-        className="dialog-wrapper"
+        transitionName="dialog"
+        transitionAppear={true}
+        transitionAppearTimeout={300}
+        transitionEnter={false}
+        transitionLeave={false}
       >
-        <div className="dialog-content">
-          <button className="dialog-close-btn" />
+        <div
+          onClick={e =>
+            e.target.className === 'dialog-wrapper' || e.target.className === 'dialog-close-btn'
+              ? toggleDialog()
+              : null
+          }
+          className="dialog-wrapper"
+        >
+          <div className="dialog-content">
+            <button className="dialog-close-btn" />
 
-          <h3 className="dialog-title">{title}</h3>
+            <h3 className="dialog-title">{title}</h3>
 
-          {children}
+            {children}
+          </div>
         </div>
-      </div>
       </ReactCSSTransitionGroup>
     );
   }
