@@ -28,7 +28,7 @@ class Dialog extends Component {
 }
 
 Dialog.propTypes = {
-  toggleDialog: PropTypes.func.isRequired,
+  toggleDialog: PropTypes.func.isRequired, // закрытие / открытие диалога (состояние хранится наверху)
   title: PropTypes.string,
   children: PropTypes.node, // контент диалога
 };

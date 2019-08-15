@@ -59,6 +59,9 @@ class Board extends Component {
   renderTasks = status => {
     // отбираем по статусу - рендерим в колонку
     let filteredTasks = [...this.state.tasks].filter(task => task.status === status);
+    filteredTasks = filteredTasks.sort((taskA, taskB) => {
+      return Number(taskB.createDate) - Number(taskA.createDate)
+    })
     return filteredTasks.map(task => {
       return (
         <Task

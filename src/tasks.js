@@ -2,8 +2,22 @@ let tasks = [
   {
     description: 'test task1',
     priority: 'low',
-    createDate: new Date(2019, 7, 20),
+    createDate: new Date(2019, 7, 9),
     id: 523523513,
+    status: 'doIt',
+  },
+  {
+    description: 'test task2',
+    priority: 'low',
+    createDate: new Date(2019, 7, 12),
+    id: 523523511,
+    status: 'doIt',
+  },
+  {
+    description: 'test task3',
+    priority: 'low',
+    createDate: new Date(2019, 7, 14),
+    id: 523523013,
     status: 'doIt',
   },
   {
