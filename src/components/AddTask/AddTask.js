@@ -2,44 +2,28 @@ import React, { Component } from 'react';
 import Dialog from '../Dialog/Dialog';
 import './style.css';
 import PropTypes from 'prop-types';
+import withModifyTask from './../../hocs/withModifyTask'
 
 class AddTask extends Component {
-  state = {
-    descriptionInput: '',
-    currentPriority: 'low',
-    isValid: true,
-  };
-
-  changeDescription = ({ target: { value } }) => {
-    this.setState({
-      descriptionInput: value,
-    });
-  };
-
-  changePriority = ({ target: { value } }) => {
-    this.setState({
-      currentPriority: value,
-    });
-  };
 
   render() {
-    const { toggleAddTask, addTask } = this.props;
+    const { toggleAddTask, addTask, changeValid, changePriority, changeDescription, descriptionInput, currentPriority, isValid } = this.props;
 
     return (
       <Dialog toggleDialog={toggleAddTask} title="Add new task">
         <div className="text">Description:</div>
-        {!this.state.isValid && <div className="error-msg">Description too short!</div>}
+        {!isValid && <div className="error-msg">Description too short!</div>}
         <textarea
-          onChange={this.changeDescription}
-          value={this.state.descriptionInput}
+          onChange={changeDescription}
+          value={descriptionInput}
           className="dialog-textarea"
         />
 
         <div className="text">Priority:</div>
         <select
           className="select"
-          value={this.state.currentPriority}
-          onChange={this.changePriority}
+          value={currentPriority}
+          onChange={changePriority}
           name="priority"
         >
           <option value="low">Low</option>
@@ -50,13 +34,13 @@ class AddTask extends Component {
 
         <button
           onClick={e => {
-            if (this.state.descriptionInput.length < 3) this.setState({ isValid: false });
+            if (descriptionInput.length < 3) changeValid(false);
             else {
-              this.setState({ isValid: true });
+              changeValid(true);
 
               addTask(e, {
-                description: this.state.descriptionInput,
-                priority: this.state.currentPriority,
+                description: descriptionInput,
+                priority: currentPriority,
                 status: 'doIt',
                 createDate: new Date(),
                 id: Date.now() + Math.random(),
@@ -77,6 +61,17 @@ class AddTask extends Component {
 AddTask.propTypes = {
   toggleAddTask: PropTypes.func.isRequired, // передаём в Dialog, Board function
   addTask: PropTypes.func.isRequired, // Board function
+  changeValid: PropTypes.func.isRequired,
+  changePriority: PropTypes.func.isRequired,
+  changeDescription: PropTypes.func.isRequired,
+  descriptionInput: PropTypes.string.isRequired,
+  currentPriority: PropTypes.string.isRequired,
+  isValid: PropTypes.bool.isRequired
 };
 
-export default AddTask;
+export default withModifyTask((props) => (
+  {
+    descriptionInput: '',
+    currentPriority: 'low',
+  }
+))(AddTask);
