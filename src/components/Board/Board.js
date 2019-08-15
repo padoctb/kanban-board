@@ -119,8 +119,10 @@ class Board extends Component {
         transitionAppear={true}
         transitionAppearTimeout={300}
         transitionEnter={false}
-        transitionLeave={false}>
-        <Draggable type={task.status.toLowerCase()} data={task.id} key={task.id}> 
+        transitionLeave={false}
+        key={task.id}
+        >
+        <Draggable type={task.status.toLowerCase()} data={task.id}> 
           <Task
             toggleEditTask={this.toggleEditTask}
             editTask={this.editTask}
